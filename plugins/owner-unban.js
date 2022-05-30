@@ -1,4 +1,3 @@
-import { MessageType } from '@adiwajshing/baileys'
 let handler = async (m, { conn, text}) => {
     if (!text) throw 'Siapa yang mau di unbanned?'
     let who
