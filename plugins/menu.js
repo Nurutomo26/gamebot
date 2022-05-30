@@ -20,7 +20,6 @@ let tags = {
   'database': 'Database',
   'quran': 'Islami',
   'owner': 'Owner',
-  'host': 'Host',
   'advanced': 'Advanced',
   'info': 'Info',
   'maker': 'Maker',
