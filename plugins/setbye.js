@@ -10,5 +10,6 @@ handler.help = ['setbye <teks>']
 handler.tags = ['owner', 'group']
 
 handler.command = /^setbye$/i
-module.exports = handler
+
+export default handler
 
