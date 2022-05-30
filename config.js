@@ -3,8 +3,9 @@ import chalk from 'chalk'
 import { fileURLToPath } from 'url'
 
 global.owner = [
-  ['6289524664142'],
-  ['12053866602', 'BG', true]
+  ['6289524664142', 'Jaya'],
+  ['62895323263219', 'Ryan'],
+  ['12053866602', 'Gulfi', true]
   // [number, dia creator/owner?, dia developer?]
 ] // Put your number here
 global.mods = [] // Want some help?
@@ -15,22 +16,18 @@ global.APIs = { // API Prefix
   bg: 'http://bochil.ddns.net',
   xteam: 'https://api.xteam.xyz',
   zahir: 'https://zahirr-web.herokuapp.com',
-  zeks: 'https://api.zeks.xyz',
-  pencarikode: 'https://pencarikode.xyz',
-  LeysCoder: 'https://leyscoders-api.herokuapp.com'
+  pencarikode: 'https://api.chipa.xyz',
 }
 global.APIKeys = { // APIKey Here
   // 'https://website': 'apikey'
-  'https://api.xteam.xyz': 'genbotkey',
+  'https://api.xteam.xyz': '5c6d619139643153',
   'https://zahirr-web.herokuapp.com': 'zahirgans',
-  'https://api.zeks.xyz': 'apivinz',
-  'https://pencarikode.xyz': 'pais',
-  'https://leyscoders-api.herokuapp.com': 'dappakntlll'
+  'https://api.chipa.xyz': 'pais'
 }
 
 // Sticker WM
-global.packname = 'CurvyBot-Md'
-global.author = 'Powered By Gulfi'
+global.packname = 'HurvyBot-Md'
+global.author = 'Powered By Hurvybotz'
 
 global.multiplier = 69 // The higher, The harder levelup
 
