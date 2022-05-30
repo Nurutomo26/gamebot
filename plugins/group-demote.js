@@ -12,7 +12,7 @@ let handler = async (m, { conn, participants }) => {
 
 }
 handler.help = ['demote','member','↓'].map(v => v + ' @user')
-handler.tags = ['admin']
+handler.tags = ['group']
 
 handler.command = /^(demote|member|↓)$/i
 
