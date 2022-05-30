@@ -12,4 +12,3 @@ handler.tags = ['owner', 'group']
 handler.command = /^setbye$/i
 
 export default handler
-
