@@ -48,7 +48,7 @@ const defaultMenu = {
 │ 📊 Database: %rtotalreg of %totalreg
 ╰────
 %readmore`.trimStart(),
-  header: '╭─「 *%category* 」',
+  header: '╭─「 *%category Menu* 」',
   body: '│ • %cmd %islimit %isPremium',
   footer: '╰────\n',
   after: `
