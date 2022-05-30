@@ -1,5 +1,3 @@
-import db from '../lib/database.js'
-
 const items = {
     buy: {
         limit: {
@@ -23,7 +21,7 @@ const items = {
 }
 
 let handler = async (m, { command, usedPrefix, args }) => {
-    let user = db.data.users[m.sender]
+    let user = global.db.data.users[m.sender]
     const listItems = Object.fromEntries(Object.entries(items[command.toLowerCase()]).filter(([v]) => v && v in user))
     const info = `
 Use Format *${usedPrefix}${command} [crate] [count]*

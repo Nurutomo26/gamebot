@@ -1,8 +1,6 @@
-import db from '../lib/database.js'
-
 const cooldown = 300000
 let handler = async (m, { usedPrefix }) => {
-    let user = db.data.users[m.sender]
+    let user = global.db.data.users[m.sender]
     let timers = (cooldown - (new Date - user.lastadventure))
     if (user.health < 80) return m.reply(`
 Requires at least 80 ❤️Healths for the adventure!!

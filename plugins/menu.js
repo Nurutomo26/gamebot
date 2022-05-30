@@ -1,8 +1,6 @@
-import db from '../lib/database.js'
 import { promises } from 'fs'
 import { join } from 'path'
 import { xpRange } from '../lib/levelling.js'
-import { plugins } from '../lib/plugins.js'
 let tags = {
   'main': 'Main',
   'game': 'Game',
@@ -23,7 +21,7 @@ let tags = {
   'database': 'Database',
   'vote': 'Voting',
   'absen': 'Absen',
-  'quran': 'Islami',
+  'quran': 'Al Qur\'an',
   'jadibot': 'Jadi Bot',
   'owner': 'Owner',
   'host': 'Host',
@@ -33,7 +31,7 @@ let tags = {
 }
 const defaultMenu = {
   before: `
-╭─「 *%me 🤖* 」
+╭─「 %me 🤖」
 │ 👋🏻 Hai, %name!
 │
 │ 🧱 Limit : *%limit Limit*
@@ -48,7 +46,7 @@ const defaultMenu = {
 │ 📊 Database: %rtotalreg of %totalreg
 ╰────
 %readmore`.trimStart(),
-  header: '╭─「 *%category Menu* 」',
+  header: '╭─「 %category 」',
   body: '│ • %cmd %islimit %isPremium',
   footer: '╰────\n',
   after: `
@@ -59,7 +57,7 @@ ${'```%npmdesc```'}
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   try {
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
-    let { exp, limit, level, role } = db.data.users[m.sender]
+    let { exp, limit, level, role } = global.db.data.users[m.sender]
     let { min, xp, max } = xpRange(level, global.multiplier)
     let name = await conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
@@ -96,9 +94,9 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     let muptime = clockString(_muptime)
     let uptime = clockString(_uptime)
-    let totalreg = Object.keys(db.data.users).length
-    let rtotalreg = Object.values(db.data.users).filter(user => user.registered == true).length
-    let help = Object.values(plugins).filter(plugin => !plugin.disabled).map(plugin => {
+    let totalreg = Object.keys(global.db.data.users).length
+    let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
+    let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
       return {
         help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
         tags: Array.isArray(plugin.tags) ? plugin.tags : [plugin.tags],
@@ -117,7 +115,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let header = conn.menu.header || defaultMenu.header
     let body = conn.menu.body || defaultMenu.body
     let footer = conn.menu.footer || defaultMenu.footer
-    let after = conn.menu.after || (conn.user.jid == conn.user.jid ? '' : `Powered by https://wa.me/${conn.user.jid.split`@`[0]}`) + defaultMenu.after
+    let after = conn.menu.after || (conn.user.jid == global.conn.user.jid ? '' : `Powered by https://wa.me/${global.conn.user.jid.split`@`[0]}`) + defaultMenu.after
     let _text = [
       before,
       ...Object.keys(tags).map(tag => {

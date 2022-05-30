@@ -1,5 +1,3 @@
-import db from '../lib/database.js'
-
 const rewards = {
     exp: 50000,
     money: 49999,
@@ -10,7 +8,7 @@ const rewards = {
 
 const cooldown = 2592000000
 let handler = async (m) => {
-    let user = db.data.users[m.sender]
+    let user = global.db.data.users[m.sender]
     if (new Date - user.lastmonthly < cooldown) throw `You have already claimed this monthly claim, wait for *${((user.lastmonthly + cooldown) - new Date()).toTimeString()}*`
     let text = ''
     for (let reward of Object.keys(rewards)) if (reward in user) {

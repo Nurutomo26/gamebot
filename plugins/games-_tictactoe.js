@@ -1,5 +1,4 @@
 import { format } from 'util'
-import db from '../lib/database.js'
 
 let debugMode = !1
 
@@ -70,7 +69,7 @@ ${isWin ? `@${winner.split('@')[0]} Menang! (+${winScore} XP)` : isTie ? `Game b
 Ketik *nyerah* untuk nyerah
 Room ID: ${room.id}
 `.trim()
-        let users = db.data.users
+        let users = global.db.data.users
         if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
             room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
         const btn = isTie ? ['TicTacToe', '/ttt'] : ['Nyerah', 'nyerah']

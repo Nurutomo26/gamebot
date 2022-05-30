@@ -1,6 +1,4 @@
-import db from '../lib/database.js'
 import { areJidsSameUser } from '@adiwajshing/baileys'
-
 const leaderboards = [
   'level',
   'exp',
@@ -23,7 +21,7 @@ const leaderboards = [
   'pet'
 ]
 let handler = async (m, { conn, args, participants, usedPrefix, command }) => {
-  let users = Object.entries(db.data.users).map(([key, value]) => {
+  let users = Object.entries(global.db.data.users).map(([key, value]) => {
     return { ...value, jid: key }
   })
   let leaderboard = leaderboards.filter(v => v && users.filter(user => user && user[v]).length)
