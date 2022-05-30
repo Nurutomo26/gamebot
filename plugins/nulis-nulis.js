@@ -60,12 +60,9 @@ let handler = async (m, { conn, args }) => {
         })
         .stdout.on('data', chunk => bufs.push(chunk))
 }
-handler.help = ['n'].map(v => v + 'ulis <teks>')
+handler.help = ['nulis'].map(v => v + ' <teks>')
 handler.tags = ['nulis']
 handler.command = /^nulis$/i
 
 
 export default handler
-
-// BY MFARELS NJEENK
-// https://GitHub.com/MFarelS/
