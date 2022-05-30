@@ -15,14 +15,12 @@ global.APIs = { // API Prefix
   nrtm: 'https://nurutomo.herokuapp.com',
   bg: 'http://bochil.ddns.net',
   xteam: 'https://api.xteam.xyz',
-  zahir: 'https://zahirr-web.herokuapp.com',
-  pencarikode: 'https://api.chipa.xyz',
+  zahir: 'https://zahirr-web.herokuapp.com'
 }
 global.APIKeys = { // APIKey Here
   // 'https://website': 'apikey'
   'https://api.xteam.xyz': '5c6d619139643153',
-  'https://zahirr-web.herokuapp.com': 'zahirgans',
-  'https://api.chipa.xyz': 'pais'
+  'https://zahirr-web.herokuapp.com': 'zahirgans'
 }
 
 // Sticker WM
