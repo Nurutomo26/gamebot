@@ -1,7 +1,5 @@
-import db from '../lib/database.js'
-
 export function before(m) {
-    let user = db.data.users[m.sender]
+    let user = global.db.data.users[m.sender]
     if (user.afk > -1) {
         m.reply(`
   Kamu berhenti AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
@@ -12,7 +10,7 @@ export function before(m) {
     }
     let jids = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
     for (let jid of jids) {
-        let user = db.data.users[jid]
+        let user = global.db.data.users[jid]
         if (!user)
             continue
         let afkTime = user.afk
