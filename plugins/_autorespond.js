@@ -11,23 +11,23 @@ handler.all = async function (m, { conn, isBlocked }) {
     // ketika ditag 
     if (m.isGroup) {
         if (m.mentionedJid.includes(this.user.jid)) {
-            await this.send2Button(m.chat,
+            await this.sendButton(m.chat,
                 isBanned ? 'hurvy tidak aktif' : banned ? 'kamu dibanned' : 'hurvy aktif',
                 author,
-                isBanned ? 'Unban' : banned ? 'Pemilik Bot' : 'Menu',
+                [isBanned ? 'Unban' : banned ? 'Pemilik Bot' : 'Menu',
                 isBanned ? '.unban' : banned ? '.owner' : '.?',
                 m.isGroup ? 'Ban' : isBanned ? 'Unban' : 'Donasi',
-                m.isGroup ? '.ban' : isBanned ? '.unban' : '.donasi', m)
+                m.isGroup ? '.ban' : isBanned ? '.unban' : '.donasi'], m)
         }
     }
 
     // ketika ada yang invite/kirim link grup di chat pribadi
     if ((m.mtype === 'groupInviteMessage' || m.text.startsWith('https://chat') || m.text.startsWith('Buka tautan ini')) && !m.isBaileys && !m.isGroup) {
-        this.sendButton(m.chat, `┌「 *Undang Bot ke Grup* 」
+        this.sendButton(m.chat, `┌「 *Undang Bot Ke Grup* 」
 ├ Maaf bot ini private untuk diundang di grup
 ├ Chat owner agar bot bisa diundang ke grup
 └────
-`.trim(), author, 'Pemilik Bot', '/owner', m)
+`.trim(), author, ['Pemilik Bot', '/owner'], m)
     }
 
     // salam
