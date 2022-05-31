@@ -1,12 +1,17 @@
-import { facebookdl, facebookdlv2 } from '@bochilteam/scraper'
+import { facebook } from '../lib/scrape'
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) throw `Use example ${usedPrefix}${command} https://fb.watch/azFEBmFRcy/`
-    const { result } = await facebookdl(args[0]).catch(async _ => await facebookdlv2(args[0]))
-    for (const { url, isVideo } of result.reverse()) conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `🔗 *Url:* ${url}`, m)
+  if (!args[0]) throw `Uhm.. url nya mana?\n\ncontoh:\n${usedPrefix + command} https://www.facebook.com/alanwalkermusic/videos/277641643524720`
+  if (!args[0].match(/https:\/\/.*(facebook.com|fb.watch)/gi)) throw `Url salah`
+  facebook(args[0]).then(async res => {
+    let fb = JSON.stringify(res)
+    let json = JSON.parse(fb)
+    if (!json.status) throw json
+    await conn.sendFile(m.chat, json.data[0].url, '', author, m)
+  }).catch(_ => _)
 }
-handler.help = ['facebbok'].map(v => v + ' <url>')
+handler.help = ['fb'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 
-handler.command = /^((facebook|fb)(downloder|dl)?)$/i
+handler.command = /^f((b|acebook)(dl|download)?(er)?)$/i
 
 export default handler
