@@ -12,7 +12,7 @@ handler.all = async function (m, { conn, isBlocked }) {
     if (m.isGroup) {
         if (m.mentionedJid.includes(this.user.jid)) {
             await this.sendButton(m.chat,
-                isBanned ? 'hurvy tidak aktif' : banned ? 'kamu dibanned' : 'hurvy aktif',
+                isBanned ? `${getName(user.jid)} tidak aktif` : banned ? 'kamu dibanned' : `${getName(user.jid)} tidak aktif`,
                 author,
                 [isBanned ? 'Unban' : banned ? 'Pemilik Bot' : 'Menu',
                 isBanned ? '.unban' : banned ? '.owner' : '.?',
@@ -58,7 +58,7 @@ handler.all = async function (m, { conn, isBlocked }) {
         if (new Date() * 1 - set.status > 1000) {
             let _uptime = process.uptime() * 1000
             let uptime = conn.clockString(_uptime)
-            await this.setStatus(`Aktif selama ${uptime} | Mode: ${set.self ? 'Private' : set.group ? 'Hanya Grup' : 'Publik'} | Hurvybot oleh Gulfi`).catch(_ => _)
+            await this.setStatus(`Aktif selama ${uptime} | Mode: ${set.self ? 'Private' : set.group ? 'Hanya Grup' : 'Publik'} | ${getName(user.jid)}`).catch(_ => _)
             set.status = new Date() * 1
         }
     }
