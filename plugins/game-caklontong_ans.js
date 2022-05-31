@@ -6,12 +6,12 @@ export async function before(m) {
         return !0
     this.caklontong = this.caklontong ? this.caklontong : {}
     if (!(id in this.caklontong))
-        return m.reply('Soal itu telah berakhir')
+        return conn.sendButton(m.chat, 'Soal itu telah berakhir', author, ['Main Lagi', '/caklontong'], m)
     if (m.quoted.id == this.caklontong[id][0].id) {
         let json = JSON.parse(JSON.stringify(this.caklontong[id][1]))
         if (m.text.toLowerCase() == json.jawaban.toLowerCase().trim()) {
             global.db.data.users[m.sender].exp += this.caklontong[id][2]
-            await this.sendButton(m.chat, `*Benar!* +${this.caklontong[id][2]} XP\n${json.deskripsi}`, author, null, [['Cak Lontong', '.caklontong']], m)
+            await this.sendButton(m.chat, `*Benar!* +${this.caklontong[id][2]} XP\n${json.deskripsi}`, author, null, [['Main Lagi', '.caklontong']], m)
             clearTimeout(this.caklontong[id][3])
             delete this.caklontong[id]
         } else if (similarity(m.text.toLowerCase(), json.jawaban.toLowerCase().trim()) >= threshold)
