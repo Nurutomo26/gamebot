@@ -632,7 +632,7 @@ export async function participantsUpdate({ id, participants, action }) {
                     } finally {
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'unknow') :
                             (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-                        this.sendButton(id, text, author, pp, [['Menu', '/menu', ['Donasi', '/donasi']], m)
+                        this.sendFile(id, pp, 'pp.jpg', text, null, false, { mentions: [user] })
                     }
                 }
             }
@@ -681,21 +681,18 @@ export async function deleteUpdate(message) {
         let chat = global.db.data.chats[msg.chat] || {}
         if (chat.delete)
             return
-        await this.sendButton(msg.chat, `Terdeteksi @${participant.split`@`[0]} telah menghapus pesan\nUntuk mematikan fitur ini\nSilakan klik tombol dibawah`.trim(), author, ['Matikan Antidelete', '/enable delete'], msg)
+        await this.reply(msg.chat, `
+Terdeteksi @${participant.split`@`[0]} telah menghapus pesan
+Untuk mematikan fitur ini
+Silakan ketik /enable delete
+`.trim(), msg, {
+            mentions: [participant]
+        })
         this.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
     } catch (e) {
         console.error(e)
     }
 }
-
-/*this.ws.on('CB:call', async (json) => {
-if (!setting.anticall) return
-const callerId = json.content[0].attrs['call-creator']
-if (json.content[0].tag == 'offer') {
-this.sendButton(callerId, 'Terdeteksi kamu telah menelpon bot!\n\nHubungi owner agar kamu terlepas dari blockiran bot!', author, ['Chat Owner', '/owner'], m)
-await this.updateBlockStatus(callerId, "block")
-}
-})*/
 
 global.dfail = (type, m, conn) => {
     let msg = {
@@ -710,7 +707,7 @@ global.dfail = (type, m, conn) => {
         unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Manusia.16*',
         restrict: 'Fitur telah dibatasi!, chat owner untuk menonaktifkan fitur ini!'
     }[type]
-    if (msg) return this.sendButton(m.chat, msg, author, [['Menu', '/menu'], ['Donasi', '/donasi']], m)
+    if (msg) return m.reply(msg)
 }
 
 let file = global.__filename(import.meta.url, true)
