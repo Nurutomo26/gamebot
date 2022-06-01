@@ -13,6 +13,9 @@ let handler = async (m, { conn, usedPrefix, text, isAdmin, isOwner }) => {
 }
 handler.help = ['mulaiabsen [teks]']
 handler.tags = ['absen']
+
 handler.command = /^(start|mulai|\+)absen$/i
+handler.group = true
+handler.admin = true
 
 export default handler

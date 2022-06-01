@@ -10,6 +10,9 @@ let handler = async (m, { conn, usedPrefix, isAdmin, isOwner }) => {
 }
 handler.help = ['hapusabsen']
 handler.tags = ['absen']
+
 handler.command = /^(delete|hapus|-)absen$/i
+handler.group = true
+handler.admin = true
 
 export default handler
