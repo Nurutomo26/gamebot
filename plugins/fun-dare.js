@@ -1,5 +1,5 @@
 let handler = async(m, { conn }) => {
-	conn.sendButton(m.chat, '*DARE*\n\n' + pickRandom(dare), author, ['Tantangan', '/dare', 'Kejujuran', '/truth'], m)
+	conn.sendButton(m.chat, '*DARE*\n\n' + pickRandom(dare), author, [['Tantangan', '/dare'], ['Kejujuran', '/truth']], m)
 }
 handler.help = ['dare']
 handler.tags = ['fun']
