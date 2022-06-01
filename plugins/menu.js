@@ -9,6 +9,7 @@ let tags = {
   'sticker': 'Sticker',
   'kerang': 'Kerang Ajaib',
   'quotes': 'Quotes',
+  'admin': 'Admin',
   'group': 'Group',
   'premium': 'Premium',
   'internet': 'Internet',
@@ -18,34 +19,38 @@ let tags = {
   'tools': 'Tools',
   'fun': 'Fun',
   'database': 'Database',
-  'quran': 'Islami',
+  'vote': 'Voting',
+  'absen': 'Absen',
+  'quran': 'Al Qur\'an',
+  'jadibot': 'Jadi Bot',
   'owner': 'Owner',
+  'host': 'Host',
   'advanced': 'Advanced',
   'info': 'Info',
-  'maker': 'Maker',
-  'audio': 'Audio',
   '': 'No Category',
 }
 const defaultMenu = {
   before: `
-╭─「 *%me* 」
-│ 👋🏻 Hai, %name!
-│
-│ 🧱 Limit : *%limit Limit*
-│ 🦸🏼‍♂️ Role : *%role*
-│ 🔼 Level : *%level (%exp / %maxexp)*
-│ 💫 Total XP : %totalexp ✨
-│ 
-│ 📅 Tanggal: *%week, %date*
-│ 🕰️ Waktu: *%time*
-│
-│ 📈 Uptime: *%uptime (%muptime)*
-│ 📊 Database: %rtotalreg of %totalreg
-╰────
+👋🏻 Hai, %name!
+
+🧱 Limit : *%limit Limit*
+🦸🏼‍♂️ Role : *%role*
+🔼 Level : *%level (%exp / %maxexp)*
+💫 Total XP : %totalexp ✨
+
+📅 Tanggal: *%week, %date*
+🕰️ Waktu: *%time*
+
+📈 Uptime: *%uptime (%muptime)*
+📊 Database: %rtotalreg of %totalreg
+
+Untuk melihat menu
+Silakan klik baca selengkapnya
+Dibawah ini ↓
 %readmore`.trimStart(),
-  header: '╭─「 *%category Menu* 」',
-  body: '│ • %cmd %islimit %isPremium',
-  footer: '╰────\n',
+  header: '*%category Menu*',
+  body: '~> %cmd %islimit %isPremium',
+  footer: '\n',
   after: `
 *%npmname* | %version
 ${'```%npmdesc```'}
@@ -149,7 +154,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
     conn.sendHydrated(m.chat, text.trim(), author, pp, 'https://github.com/BochilGaming/games-wabot', 'Github', null, null, [
-      ['Donate', '/donasi'],
+      ['Donasi', '/donasi'],
       ['Speed', '/ping'],
       ['Owner', '/owner']
     ], m)
