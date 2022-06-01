@@ -12,7 +12,7 @@ handler.all = async function (m, { conn, isBlocked }) {
     if (m.isGroup) {
         if (m.mentionedJid.includes(this.user.jid)) {
             await this.sendButton(m.chat,
-                isBanned ? `${getName(user.jid)} tidak aktif` : banned ? 'kamu dibanned' : `${getName(user.jid)} tidak aktif`,
+                isBanned ? `hurvybotz tidak aktif` : banned ? 'kamu telah dibanned' : `hurvybotz tidak aktif`,
                 author,
                 [isBanned ? 'Unban' : banned ? 'Pemilik Bot' : 'Menu',
                 isBanned ? '.unban' : banned ? '.owner' : '.?',
@@ -24,10 +24,10 @@ handler.all = async function (m, { conn, isBlocked }) {
     // ketika ada yang invite/kirim link grup di chat pribadi
     if ((m.mtype === 'groupInviteMessage' || m.text.startsWith('https://chat') || m.text.startsWith('Buka tautan ini')) && !m.isBaileys && !m.isGroup) {
         this.sendButton(m.chat, `┌「 *Undang Bot Ke Grup* 」
-├ Maaf bot ini private untuk diundang di grup
-├ Chat owner agar bot bisa diundang ke grup
+├ Tidak dapat mengundang bot ke grup
+├ Chat owner untuk mengundang bot ke grup
 └────
-`.trim(), author, ['Pemilik Bot', '/owner'], m)
+`.trim(), author, [['Pemilik Bot', '/owner'], ['Donasi', '/donasi']], m)
     }
 
     // salam
@@ -37,28 +37,12 @@ handler.all = async function (m, { conn, isBlocked }) {
         m.reply(`وَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ\n_wa\'alaikumussalam wr.wb._`)
     }
 
-    // backup db
-    if (set.backup) {
-        if (new Date() * 1 - set.backupTime > 1000 * 60 * 60) {
-            let d = new Date
-            let date = d.toLocaleDateString('id', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            })
-            await global.db.write()
-            this.reply(global.owner[0] + '@s.whatsapp.net', `Database: ${date}`, null)
-            this.sendFile(global.owner[0] + '@s.whatsapp.net', fs.readFileSync('./database.json'), 'database.json', '', 0, 0, { mimetype: 'application/json' })
-            set.backupTime = new Date() * 1
-        }
-    }
-
     // update status
     if (set.autoupdatestatus) {
         if (new Date() * 1 - set.status > 1000) {
             let _uptime = process.uptime() * 1000
             let uptime = conn.clockString(_uptime)
-            await this.setStatus(`Aktif selama ${uptime} | Mode: ${set.self ? 'Private' : set.group ? 'Hanya Grup' : 'Publik'} | ${getName(user.jid)}`).catch(_ => _)
+            await this.setStatus(`Aktif selama ${uptime} | Mode: ${set.self ? 'Private' : set.group ? 'Hanya Grup' : 'Publik'} | Hurvybotz dibuat oleh JayaGanz`).catch(_ => _)
             set.status = new Date() * 1
         }
     }
