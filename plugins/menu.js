@@ -152,11 +152,8 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
-    conn.sendHydrated(m.chat, text.trim(), author, pp, 'https://github.com/BochilGaming/games-wabot', 'Github', null, null, [
-      ['Donasi', '/donasi'],
-      ['Speed', '/ping'],
-      ['Owner', '/owner']
-    ], m)
+    conn.sendHydrated(m.chat, text.trim(), author, pp, 'https://github.com/BochilGaming/games-wabot', 'Github', null, null, [['Donasi', '/donasi'], ['Speed', '/ping'], ['Owner', '/owner']], m)
+    conn.sendFile(m.chat, promises.readFileSync('../src/djmenu.mp3'), '', m, true, { mimetype: 'audio/mp4' })
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
