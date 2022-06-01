@@ -1,7 +1,7 @@
 {
-    "name": "games-wabot",
+    "name": "HurvyBotz-Md",
     "version": "2.0.0",
-    "description": "Customizable WhatsApp Bot",
+    "description": "Whatsapp bot ringan kalo yang berat dosamu :)",
     "main": "index.js",
     "type": "module",
     "directories": {
